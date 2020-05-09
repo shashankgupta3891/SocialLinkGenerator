@@ -1,4 +1,4 @@
-# Tic Tac Toe
+# Social Link Generator
 
 _Build a legendary Tic Tac Toe game in flutter<br>
 Link Generator App._
