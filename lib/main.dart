@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Whatapp Link ',
+      title: 'Social Link',
       theme: ThemeData(
         fontFamily: 'Open_Sans',
         primarySwatch: Colors.blue,
