@@ -9,11 +9,10 @@ Download the app from [here](https://drive.google.com/file/d/1Zcojp8L7VttF3mkXjM
 
 ## Screenshots
 
-<img src="https://github.com/Akash-Gupta-2000/Tic-Tac-Toe/blob/master/images/readme/homePage.png" width="160">|
-<img src="https://github.com/Akash-Gupta-2000/Tic-Tac-Toe/blob/master/images/readme/ongoing.png" width="160">|
-<img src="https://github.com/Akash-Gupta-2000/Tic-Tac-Toe/blob/master/images/readme/drawer.png" width="160">|
-<img src="https://github.com/Akash-Gupta-2000/Tic-Tac-Toe/blob/master/images/readme/win.png" width="160">|
-<img src="https://github.com/Akash-Gupta-2000/Tic-Tac-Toe/blob/master/images/readme/dev.png" width="160">
+<img src="https://github.com/shashankgupta3891/SocialLinkGenerator/blob/master/images/Screenshot_2020-05-09-18-48-41-111_shashankgupta.whatsappshare.jpg?raw=true" width="160">|
+<img src="https://github.com/shashankgupta3891/SocialLinkGenerator/blob/master/images/Screenshot_2020-05-09-18-48-50-548_shashankgupta.whatsappshare.jpg?raw=true" width="160">|
+<img src="https://github.com/shashankgupta3891/SocialLinkGenerator/blob/master/images/Screenshot_2020-05-09-18-48-56-479_shashankgupta.whatsappshare.jpg?raw=true" width="160">|
+<img src="https://github.com/shashankgupta3891/SocialLinkGenerator/blob/master/images/Screenshot_2020-05-09-18-49-01-755_shashankgupta.whatsappshare.jpg?raw=true" width="160">
 
 ### Found this project useful? :heart:
 
