@@ -1,11 +1,11 @@
 # Social Link Generator
 
-_Build a legendary Tic Tac Toe game in flutter<br>
+_Build an app to create social media sharing links which will have build in custom message in flutter<br>
 Link Generator App._
 
 Download the app from [here](https://drive.google.com/file/d/1Zcojp8L7VttF3mkXjMLIUWdcIfDJTYBY/view?usp=sharing).
 
-**I hope this app will help you ❤️ to create Whatsapp Api created links to sent pre typed message to your customer**
+**I hope this app will help you ❤️ to create social media sharing links to sent pre typed message to your customer**
 
 ## Screenshots
 
