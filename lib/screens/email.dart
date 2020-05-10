@@ -27,7 +27,7 @@ class _EmailLinkState extends State<EmailLink> {
       ),
     );
     return Scaffold(
-      key: _drawerKey,
+//      key: _drawerKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
@@ -38,7 +38,7 @@ class _EmailLinkState extends State<EmailLink> {
           Share.share("mailto:$emailId?subject=$emailSubject&body=$emailBody");
         },
       ),
-      endDrawer: GlobalDrawer(),
+//      endDrawer: GlobalDrawer(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,13 +50,13 @@ class _EmailLinkState extends State<EmailLink> {
                 Navigator.pop(context);
               },
             ),
-            IconButton(
-              icon: Icon(Icons.menu),
-              color: Color(0xFFf12711),
-              onPressed: () {
-                _drawerKey.currentState.openEndDrawer();
-              },
-            ),
+//            IconButton(
+//              icon: Icon(Icons.menu),
+//              color: Color(0xFFf12711),
+//              onPressed: () {
+//                _drawerKey.currentState.openEndDrawer();
+//              },
+//            ),
           ],
         ),
       ),

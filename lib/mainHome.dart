@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:whatsappshare/screens/developerInfo.dart';
 import 'drawer.dart';
 import 'screens/messenger.dart';
 import 'screens/email.dart';
@@ -29,7 +30,7 @@ class _MainHomeState extends State<MainHome> {
       ),
     );
     return Scaffold(
-      key: _drawerKey,
+//      key: _drawerKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Invite"),
@@ -37,10 +38,10 @@ class _MainHomeState extends State<MainHome> {
           FlatIcons.share_1,
         ),
         onPressed: () {
-          Share.share("http://m.me/$pageName");
+          Share.share("https://www.linkedin.com/in/shashankgupta3891/");
         },
       ),
-      endDrawer: GlobalDrawer(),
+//      endDrawer: GlobalDrawer(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,15 +49,22 @@ class _MainHomeState extends State<MainHome> {
             IconButton(
               icon: Icon(FontAwesomeIcons.info),
               color: Colors.black,
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.menu),
-              color: Colors.black,
               onPressed: () {
-                _drawerKey.currentState.openEndDrawer();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => DevInfo(),
+                  ),
+                );
               },
             ),
+//            IconButton(
+//              icon: Icon(Icons.menu),
+//              color: Colors.black,
+//              onPressed: () {
+//                _drawerKey.currentState.openEndDrawer();
+//              },
+//            ),
           ],
         ),
       ),

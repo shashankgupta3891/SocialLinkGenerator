@@ -30,6 +30,7 @@ dependencies:
   flat_icons_flutter: ^1.0.2
   font_awesome_flutter: ^8.8.1
   animations: ^1.0.0+5
+  url_launcher: ^5.4.5
 
 dev_dependencies:
   flutter_test:

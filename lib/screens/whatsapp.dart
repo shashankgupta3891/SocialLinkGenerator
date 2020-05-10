@@ -43,7 +43,7 @@ class _WhatsappState extends State<Whatsapp> {
       ),
     );
     return Scaffold(
-      key: _drawerKey,
+//      key: _drawerKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
@@ -56,7 +56,7 @@ class _WhatsappState extends State<Whatsapp> {
               ) + number}?text=$text");
         },
       ),
-      endDrawer: GlobalDrawer(),
+//      endDrawer: GlobalDrawer(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,13 +68,13 @@ class _WhatsappState extends State<Whatsapp> {
                 Navigator.pop(context);
               },
             ),
-            IconButton(
-              icon: Icon(Icons.menu),
-              color: Colors.green,
-              onPressed: () {
-                _drawerKey.currentState.openEndDrawer();
-              },
-            ),
+//            IconButton(
+//              icon: Icon(Icons.menu),
+//              color: Colors.green,
+//              onPressed: () {
+//                _drawerKey.currentState.openEndDrawer();
+//              },
+//            ),
           ],
         ),
       ),

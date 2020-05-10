@@ -25,7 +25,7 @@ class _MessengerLinkState extends State<MessengerLink> {
       ),
     );
     return Scaffold(
-      key: _drawerKey,
+//      key: _drawerKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
@@ -36,7 +36,7 @@ class _MessengerLinkState extends State<MessengerLink> {
           Share.share("http://m.me/$pageName");
         },
       ),
-      endDrawer: GlobalDrawer(),
+//      endDrawer: GlobalDrawer(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,13 +48,13 @@ class _MessengerLinkState extends State<MessengerLink> {
                 Navigator.pop(context);
               },
             ),
-            IconButton(
-              icon: Icon(Icons.menu),
-              color: Colors.blue,
-              onPressed: () {
-                _drawerKey.currentState.openEndDrawer();
-              },
-            ),
+//            IconButton(
+//              icon: Icon(Icons.menu),
+//              color: Colors.blue,
+//              onPressed: () {
+//                _drawerKey.currentState.openEndDrawer();
+//              },
+//            ),
           ],
         ),
       ),
