@@ -89,8 +89,8 @@ class DevInfo extends StatelessWidget {
 //                  width: 1,
 //                ),
 //              ),
-                      child: Image.network(
-                        "https://lh3.googleusercontent.com/Ba-H4sWSrqcjZ00xo5fZqi89-x5cOFygA03ogk2EpdEboT3dti-LjpICUjWSCBRZ0Uhl6IO-AO3iM6oeAUGMIbUGAN_1CCq7Pc1eR8_SOfI3XCXQYkZqRbt9Dup5tAesysjFsF5yP15irHxSZUDBCUyScfeWq_aQ4tPI5U-5V4uGHxv4leo4nwPJt8N7XwxfkQTEN5B2-f8Q5OjUXsrK4Y1av6u51Yq4wlXEAYQ3OiDrL-ygs4u3In3TyZ98xPPuWSIiYkvd_g9bEutHuD1_F33ZrMx-bvaX58SntIOhSsqFqis5vYz6-dXnzLgaXcTcBLwR-ScD6OA1SxbzG8yU2P_xDLTIEZkBS0noaO_k3obvJK4NsXmF-qr3XB170mbakMPv_p0-JM1_5DVURQ8hN-TBOiJkxTj1I6iIw57evodKwWkoHx-EgMaMV8xCZPIcEC6TAdteqKhX7yvrLTdjcZWTENgLUSzOO4oasLaI6N2YLD10xuezJTYVLU-LOJWAOPIsR8lXPwhmJqfausu9SwnWS6dbr4SY8MusLn-rfGi604DxwEqR96lw3cqcLmod2hYjXMkIxW_b4R6wm2gF_y39epNtm6EG9cy2SR4zta02SH3PXfKRg4xexUx3blPtm9F4J3MLrvtwHmXYbXSFjD_Fw4rgr3o7jPE-phE6TCMY4_Wlcea23usPi5sfBgc=w707-h943-no?authuser=0",
+                      child: Image.asset(
+                        "images/IMG_20191110_135433.jpg",
                         height: 300,
                         width: 300,
                         fit: BoxFit.fitWidth,
