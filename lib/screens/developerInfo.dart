@@ -44,10 +44,13 @@ class DevInfo extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: AlignmentDirectional.topStart,
+            begin: AlignmentDirectional.topCenter,
             colors: [
               Color(0xFFCB356B),
               Color(0xFFBD3F32),
+
+//              Color(0xFF34e89e),
+//              Color(0xFF0f3443),
 
 //              Color(0xFFff6a00),
 //              Color(0xFFee0979),
