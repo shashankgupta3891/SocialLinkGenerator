@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Social Link',
+      title: 'Social Links App',
       theme: ThemeData(
         fontFamily: 'Open_Sans',
         primarySwatch: Colors.blue,
