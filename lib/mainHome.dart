@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:whatsappshare/screens/developerInfo.dart';
 import 'drawer.dart';
 import 'screens/messenger.dart';
 import 'screens/email.dart';
@@ -30,7 +29,7 @@ class _MainHomeState extends State<MainHome> {
       ),
     );
     return Scaffold(
-//      key: _drawerKey,
+      key: _drawerKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Invite"),
@@ -38,10 +37,10 @@ class _MainHomeState extends State<MainHome> {
           FlatIcons.share_1,
         ),
         onPressed: () {
-          Share.share("https://www.linkedin.com/in/shashankgupta3891/");
+          Share.share("http://m.me/$pageName");
         },
       ),
-//      endDrawer: GlobalDrawer(),
+      endDrawer: GlobalDrawer(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,22 +48,15 @@ class _MainHomeState extends State<MainHome> {
             IconButton(
               icon: Icon(FontAwesomeIcons.info),
               color: Colors.black,
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.menu),
+              color: Colors.black,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => DevInfo(),
-                  ),
-                );
+                _drawerKey.currentState.openEndDrawer();
               },
             ),
-//            IconButton(
-//              icon: Icon(Icons.menu),
-//              color: Colors.black,
-//              onPressed: () {
-//                _drawerKey.currentState.openEndDrawer();
-//              },
-//            ),
           ],
         ),
       ),
@@ -75,25 +67,21 @@ class _MainHomeState extends State<MainHome> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Icon(
-                          FontAwesomeIcons.link,
-                          color: Colors.blue,
-                          size: 40,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/icons/SocialLinkLogo.png',
+                        height: 50,
+                      ),
+                      Text(
+                        "Social Links App",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 28,
                         ),
-                        Text(
-                          "Link Generator",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 28,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
 
 //
