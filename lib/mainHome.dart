@@ -8,6 +8,7 @@ import 'drawer.dart';
 import 'screens/email.dart';
 import 'screens/messenger.dart';
 import 'screens/whatsapp.dart';
+import 'screens/developerInfo.dart';
 
 class MainHome extends StatefulWidget {
   @override
@@ -48,15 +49,18 @@ class _MainHomeState extends State<MainHome> {
             IconButton(
               icon: Icon(FontAwesomeIcons.info),
               color: Colors.black,
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.menu),
-              color: Colors.black,
               onPressed: () {
-                _drawerKey.currentState.openEndDrawer();
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => DevInfo()));
               },
             ),
+//            IconButton(
+//              icon: Icon(Icons.menu),
+//              color: Colors.black,
+//              onPressed: () {
+//                _drawerKey.currentState.openEndDrawer();
+//              },
+//            ),
           ],
         ),
       ),

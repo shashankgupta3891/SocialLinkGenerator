@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DevInfo extends StatelessWidget {
-  double iconSize = 35;
+  final double iconSize = 35;
 
   @override
   Widget build(BuildContext context) {
@@ -81,14 +81,8 @@ class DevInfo extends StatelessWidget {
                         side: BorderSide(width: 10, color: Colors.white),
                         borderRadius: BorderRadius.circular(30),
                       ),
-//              shape: StadiumBorder(
-//                side: BorderSide(
-//                  color: Colors.white,
-//                  width: 1,
-//                ),
-//              ),
                       child: Image.asset(
-                        "images/IMG_20191110_135433.jpg",
+                        "assets/developerImage.jpg",
                         height: 300,
                         width: 300,
                         fit: BoxFit.fitWidth,
