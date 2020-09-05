@@ -38,7 +38,8 @@ class _MainHomeState extends State<MainHome> {
           FlatIcons.share_1,
         ),
         onPressed: () {
-          Share.share("http://m.me/$pageName");
+          Share.share(
+              "Hey I found very useful app check it\n https://play.google.com/store/apps/details?id=smartDevLabs.socialLinksApp");
         },
       ),
       endDrawer: GlobalDrawer(),

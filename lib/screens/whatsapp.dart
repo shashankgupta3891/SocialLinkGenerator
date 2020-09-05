@@ -4,7 +4,11 @@ import 'package:share/share.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:whatsappshare/constant.dart';
 import '../drawer.dart';
+import 'package:validation_extensions/validation_extensions.dart';
+
+import 'package:whatsappshare/validation.dart';
 
 class Whatsapp extends StatefulWidget {
   @override
@@ -13,6 +17,7 @@ class Whatsapp extends StatefulWidget {
 
 class _WhatsappState extends State<Whatsapp> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
 
   List<String> title = ["Whatsapp Link Generator"];
   List<Icon> titleIcon = [
@@ -51,9 +56,11 @@ class _WhatsappState extends State<Whatsapp> {
           FlatIcons.settings_5,
         ),
         onPressed: () {
-          Share.share("https://wa.me/${dialCode.substring(
-                1,
-              ) + number}?text=$text");
+          if (_formKey.currentState.validate()) {
+            Share.share("https://wa.me/${dialCode.substring(
+                  1,
+                ) + number}?text=$text");
+          }
         },
       ),
 //      endDrawer: GlobalDrawer(),
@@ -68,17 +75,10 @@ class _WhatsappState extends State<Whatsapp> {
                 Navigator.pop(context);
               },
             ),
-//            IconButton(
-//              icon: Icon(Icons.menu),
-//              color: Colors.green,
-//              onPressed: () {
-//                _drawerKey.currentState.openEndDrawer();
-//              },
-//            ),
           ],
         ),
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -101,132 +101,132 @@ class _WhatsappState extends State<Whatsapp> {
 //
             ],
           ),
-          Container(
-            height: MediaQuery.of(context).size.height - 165,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: AlignmentDirectional.topStart,
-                colors: colorGradient[0],
+          Expanded(
+            child: Container(
+//              height: MediaQuery.of(context).size.height - 165,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: AlignmentDirectional.topStart,
+                  colors: colorGradient[0],
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                ),
               ),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60),
-              ),
-            ),
-            child: Padding(
-              padding:
-                  EdgeInsets.only(left: 15, top: 30, right: 15, bottom: 25),
-              child: ListView(
-                primary: false,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18)),
-                      elevation: 7,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 2,
-                              child: CountryCodePicker(
-                                onChanged: (code) {
-                                  setState(() {
-                                    dialCode = code.dialCode;
-                                  });
-                                },
-                                initialSelection: 'IN',
-                                favorite: ['+91'],
-                                showCountryOnly: false,
-                                showOnlyCountryWhenClosed: false,
-                                alignLeft: true,
-                              ),
+              child: Padding(
+                padding:
+                    EdgeInsets.only(left: 15, top: 30, right: 15, bottom: 25),
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    primary: false,
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)),
+                          elevation: 7,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 2,
+                                  child: CountryCodePicker(
+                                    onChanged: (code) {
+                                      setState(() {
+                                        dialCode = code.dialCode;
+                                      });
+                                    },
+                                    initialSelection: 'IN',
+                                    favorite: ['+91'],
+                                    showCountryOnly: false,
+                                    showOnlyCountryWhenClosed: false,
+                                    alignLeft: true,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: TextFormField(
+//                                    autovalidate: true,
+                                    decoration: kGreyInputDecoration,
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'Please fill';
+                                      if (value.length > 10)
+                                        return 'Enter 10 digit Number';
+                                      if (!isNumeric(value))
+                                        return 'Please Enter valid number';
+                                      return null;
+                                    },
+                                    onChanged: (num) {
+                                      setState(() {
+                                        number = num;
+                                      });
+                                    },
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              flex: 4,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)),
+                          elevation: 7,
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 15),
+                                  child: Text(
+                                    "Chat Message",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
                                     ),
                                   ),
-                                  filled: true,
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey[400],
-                                  ),
-                                  hintText: "Enter Number",
-                                  fillColor: Colors.white70,
                                 ),
-                                onChanged: (num) {
-                                  setState(() {
-                                    number = num;
-                                  });
-                                },
-                                keyboardType: TextInputType.number,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18)),
-                      elevation: 7,
-                      child: Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 10),
-                              child: Text(
-                                "Chat Message",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                            TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15.0),
-                                  ),
-                                ),
-                                filled: true,
-                                hintStyle: TextStyle(color: Colors.grey[400]),
-                                hintText: "Enter Text",
-                                fillColor: Colors.white70,
-                              ),
-                              minLines: 5,
-                              maxLines: 8,
-                              keyboardType: TextInputType.text,
-                              onChanged: (textInput) {
-                                setState(
-                                  () {
-                                    text = Uri.encodeFull(textInput);
+                                TextFormField(
+                                  validator: (value) {
+                                    if (value.length == 0)
+                                      return 'Please Enter';
+                                    return null;
                                   },
-                                );
-                              },
+                                  decoration: kGreyInputDecoration.copyWith(
+                                      hintText: 'Enter Text'),
+                                  minLines: 5,
+                                  maxLines: 8,
+                                  keyboardType: TextInputType.text,
+                                  onChanged: (textInput) {
+                                    setState(
+                                      () {
+                                        text = Uri.encodeFull(textInput);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
 
 //                  Text("Number is ${widget.number}"),
 //                  Text("Number is ${widget.dialCode.substring(
 //                    1,
 //                  )}"),
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           )
