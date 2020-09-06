@@ -4,7 +4,9 @@ bool isNumeric(String str) {
 }
 
 bool isEmailId(String str) {
-  RegExp _email = RegExp(
-      r'/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/');
-  return _email.hasMatch(str.toLowerCase());
+  // var email = "tony@starkindustries.com";
+  bool emailValid = RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(str);
+  return emailValid;
 }

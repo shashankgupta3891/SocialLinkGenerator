@@ -4,8 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:whatsappshare/components/multiEmailCard.dart';
 import 'package:whatsappshare/constant.dart';
-import 'package:whatsappshare/model/carbonCopyListModel.dart';
+import 'package:whatsappshare/provider/carbonCopyListProvider.dart';
+
 import 'package:whatsappshare/validation.dart';
 import '../drawer.dart';
 
@@ -17,100 +19,13 @@ class EmailLink extends StatefulWidget {
 class _EmailLinkState extends State<EmailLink> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   final _formKey = GlobalKey<FormState>();
-  final _ccAnimatedList = GlobalKey<AnimatedListState>();
+
+  List<String> _carbonCopyList = [];
+  List<String> _blindCarbonCopyList = [];
 
   String emailId = "";
   String emailSubject = "";
   String emailBody = "";
-  List<String> carbonCopyList = [];
-
-  List<Widget> _ccTextField() {
-    List<Widget> textField = [];
-
-    carbonCopyList.asMap().forEach((key, value) {
-      textField.add(Padding(
-        padding: EdgeInsets.only(bottom: 10),
-        child: Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                initialValue: carbonCopyList[key],
-                validator: (value) {
-                  if (value.isEmpty) return 'Please Fill';
-                  if (!isEmailId(value)) return 'Email is not valid';
-                  return null;
-                },
-                decoration:
-                    kGreyInputDecoration.copyWith(hintText: 'Enter Email Id'),
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (pageNameInput) {
-                  setState(
-                    () {
-                      carbonCopyList[key] = pageNameInput;
-                      print(carbonCopyList);
-                    },
-                  );
-                },
-              ),
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.minus),
-              onPressed: () {
-                setState(() {
-                  var removed = carbonCopyList.removeAt(key);
-                  print(carbonCopyList);
-                  print(removed);
-                });
-              },
-            )
-          ],
-        ),
-      ));
-    });
-
-    return textField;
-
-    return List<Widget>.generate(carbonCopyList.length, (int index) {
-      return Padding(
-        padding: EdgeInsets.only(bottom: 10),
-        child: Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                initialValue: carbonCopyList[index],
-                validator: (value) {
-                  if (value.isEmpty) return 'Please Fill';
-                  if (!isEmailId(value)) return 'Email is not valid';
-                  return null;
-                },
-                decoration:
-                    kGreyInputDecoration.copyWith(hintText: 'Enter Email Id'),
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (pageNameInput) {
-                  setState(
-                    () {
-                      carbonCopyList[index] = pageNameInput;
-                      print(carbonCopyList);
-                    },
-                  );
-                },
-              ),
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.minus),
-              onPressed: () {
-                setState(() {
-                  var removed = carbonCopyList.removeAt(index);
-                  print(carbonCopyList);
-                  print(removed);
-                });
-              },
-            )
-          ],
-        ),
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +37,6 @@ class _EmailLinkState extends State<EmailLink> {
       ),
     );
     return Scaffold(
-//      key: _drawerKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
@@ -131,12 +45,19 @@ class _EmailLinkState extends State<EmailLink> {
         ),
         onPressed: () {
           if (_formKey.currentState.validate()) {
+            String bodyStr = emailBody == '' ? '' : '&body=' + emailBody;
+            String ccStr = _carbonCopyList.isNotEmpty
+                ? '&bcc=' + _carbonCopyList.join(', ')
+                : '';
+            String bccStr = _blindCarbonCopyList.isNotEmpty
+                ? '&bcc=' + _blindCarbonCopyList.join(', ')
+                : '';
             Share.share(
-                "mailto:$emailId?subject=$emailSubject&body=$emailBody");
+                "mailto:$emailId?subject=$emailSubject$bodyStr$ccStr$bccStr");
           }
+          print(_carbonCopyList.join(', '));
         },
       ),
-//      endDrawer: GlobalDrawer(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -202,6 +123,7 @@ class _EmailLinkState extends State<EmailLink> {
                 child: Form(
                   key: _formKey,
                   child: ListView(
+                    physics: BouncingScrollPhysics(),
                     primary: false,
                     children: <Widget>[
                       Padding(
@@ -318,6 +240,9 @@ class _EmailLinkState extends State<EmailLink> {
                                   ),
                                 ),
                                 TextField(
+                                  onTap: () {
+                                    print(_carbonCopyList);
+                                  },
                                   decoration: kGreyInputDecoration.copyWith(
                                       hintText: 'Enter Text Here'),
                                   minLines: 2,
@@ -339,71 +264,19 @@ class _EmailLinkState extends State<EmailLink> {
                       Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                          elevation: 7,
-                          child: Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 15),
-                                  child: Text(
-                                    "Carbon Copy",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                // Column(
-                                //   children: _ccTextField(),
-                                // ),
-                                AnimatedList(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    key: _ccAnimatedList,
-                                    shrinkWrap: true,
-                                    initialItemCount: carbonCopyList.length,
-                                    itemBuilder: (context, index, animation) {
-                                      return _buildWidget(animation, index);
-                                    }),
-                                RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  color: Colors.blue,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        'Add',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _ccAnimatedList.currentState
-                                          .insertItem(carbonCopyList.length);
-                                      // Provider.of<CCListModel>(context)
-                                      //     .addTaskToList();
-                                      carbonCopyList.add('');
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
+                        child: MultiEmailCard(
+                          carbonCopyList: _carbonCopyList,
+                          title: "Carbon Copy",
+                          // isRemoveButtonActive: _carbonCopyList.isNotEmpty,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                        child: MultiEmailCard(
+                          carbonCopyList: _blindCarbonCopyList,
+                          title: "Blind Carbon Copy",
+                          // isRemoveButtonActive: _blindCarbonCopyList.isNotEmpty,
                         ),
                       ),
                     ],
@@ -413,54 +286,6 @@ class _EmailLinkState extends State<EmailLink> {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  SizeTransition _buildWidget(Animation<double> animation, int index) {
-    return SizeTransition(
-      sizeFactor: animation,
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 10),
-        child: Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                initialValue: carbonCopyList[index],
-                validator: (value) {
-                  if (value.isEmpty) return 'Please Fill';
-                  if (!isEmailId(value)) return 'Email is not valid';
-                  return null;
-                },
-                decoration:
-                    kGreyInputDecoration.copyWith(hintText: 'Enter Email Id'),
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (pageNameInput) {
-                  setState(
-                    () {
-                      carbonCopyList[index] = pageNameInput;
-                      print(carbonCopyList);
-                    },
-                  );
-                },
-              ),
-            ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.minus),
-              onPressed: () {
-                setState(() {
-                  var removed = carbonCopyList.removeAt(index);
-
-                  _ccAnimatedList.currentState.removeItem(index,
-                      (context, animation) => _buildWidget(animation, index));
-
-                  print(carbonCopyList);
-                  print(removed);
-                });
-              },
-            )
-          ],
-        ),
       ),
     );
   }
