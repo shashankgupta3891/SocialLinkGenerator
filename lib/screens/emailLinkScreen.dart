@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:share/share.dart';
+
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:whatsappshare/components/customButtomSheet.dart';
 import 'package:whatsappshare/components/multiEmailCard.dart';
-import 'package:whatsappshare/constant.dart';
-import 'package:whatsappshare/provider/carbonCopyListProvider.dart';
+import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/constant.dart';
 
-import 'package:whatsappshare/validation.dart';
-import '../drawer.dart';
+import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/validation.dart';
 
-class EmailLink extends StatefulWidget {
+class EmailLinkScreen extends StatefulWidget {
   @override
-  _EmailLinkState createState() => _EmailLinkState();
+  _EmailLinkScreenState createState() => _EmailLinkScreenState();
 }
 
-class _EmailLinkState extends State<EmailLink> {
-  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+class _EmailLinkScreenState extends State<EmailLinkScreen> {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final _formKey = GlobalKey<FormState>();
 
   List<String> _carbonCopyList = [];
@@ -37,25 +35,42 @@ class _EmailLinkState extends State<EmailLink> {
       ),
     );
     return Scaffold(
+      key: scaffoldKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
         icon: Icon(
           FlatIcons.settings_5,
         ),
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState.validate()) {
             String bodyStr = emailBody == '' ? '' : '&body=' + emailBody;
             String ccStr = _carbonCopyList.isNotEmpty
-                ? '&bcc=' + _carbonCopyList.join(', ')
+                ? '&cc=' + _carbonCopyList.join(', ')
                 : '';
             String bccStr = _blindCarbonCopyList.isNotEmpty
                 ? '&bcc=' + _blindCarbonCopyList.join(', ')
                 : '';
-            Share.share(
-                "mailto:$emailId?subject=$emailSubject$bodyStr$ccStr$bccStr");
+
+            String link =
+                "mailto:$emailId?subject=$emailSubject$bodyStr$ccStr$bccStr";
+            var sheetData = await customBottomSheet(
+              context,
+              link,
+              CustomBottomSheetType.email,
+            );
+          } else {
+            scaffoldKey.currentState.showSnackBar(
+              SnackBar(
+                // behavior: SnackBarBehavior.floating,
+                content: Text('Wrong Input'),
+                action: SnackBarAction(
+                  label: 'OK',
+                  onPressed: () {},
+                ),
+              ),
+            );
           }
-          print(_carbonCopyList.join(', '));
         },
       ),
       bottomNavigationBar: BottomAppBar(
@@ -149,6 +164,7 @@ class _EmailLinkState extends State<EmailLink> {
                                   ),
                                 ),
                                 TextFormField(
+                                  initialValue: emailId,
                                   validator: (value) {
                                     if (value.isEmpty) return 'Please Fill';
                                     if (!isEmailId(value))
@@ -194,6 +210,7 @@ class _EmailLinkState extends State<EmailLink> {
                                   ),
                                 ),
                                 TextFormField(
+                                  initialValue: emailSubject,
                                   validator: (value) {
                                     if (value.isEmpty) return 'Please Enter';
                                     return null;
@@ -239,7 +256,8 @@ class _EmailLinkState extends State<EmailLink> {
                                     ),
                                   ),
                                 ),
-                                TextField(
+                                TextFormField(
+                                  initialValue: emailBody,
                                   onTap: () {
                                     print(_carbonCopyList);
                                   },

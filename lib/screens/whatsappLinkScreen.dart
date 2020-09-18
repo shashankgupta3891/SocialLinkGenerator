@@ -1,22 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:share/share.dart';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:whatsappshare/constant.dart';
-import '../drawer.dart';
-import 'package:validation_extensions/validation_extensions.dart';
+import 'package:whatsappshare/components/customButtomSheet.dart';
+import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/constant.dart';
 
-import 'package:whatsappshare/validation.dart';
+import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/validation.dart';
 
-class Whatsapp extends StatefulWidget {
+class WhatsappLinkScreen extends StatefulWidget {
   @override
-  _WhatsappState createState() => _WhatsappState();
+  _WhatsappLinkScreenState createState() => _WhatsappLinkScreenState();
 }
 
-class _WhatsappState extends State<Whatsapp> {
-  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+class _WhatsappLinkScreenState extends State<WhatsappLinkScreen> {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final _formKey = GlobalKey<FormState>();
 
   List<String> title = ["Whatsapp Link Generator"];
@@ -49,21 +49,35 @@ class _WhatsappState extends State<Whatsapp> {
     );
     return Scaffold(
 //      key: _drawerKey,
+      key: scaffoldKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
         icon: Icon(
           FlatIcons.settings_5,
         ),
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState.validate()) {
-            Share.share("https://wa.me/${dialCode.substring(
+            String link = "https://wa.me/${dialCode.substring(
                   1,
-                ) + number}?text=$text");
+                ) + number}?text=$text";
+            var sheetData = await customBottomSheet(
+                context, link, CustomBottomSheetType.whatsapp);
+          } else {
+            scaffoldKey.currentState.showSnackBar(
+              SnackBar(
+                // behavior: SnackBarBehavior.floating,
+                content: Text('Wrong Input'),
+                action: SnackBarAction(
+                  label: 'OK',
+                  onPressed: () {},
+                ),
+              ),
+            );
           }
         },
       ),
-//      endDrawer: GlobalDrawer(),
+
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +168,7 @@ class _WhatsappState extends State<Whatsapp> {
                                     decoration: kGreyInputDecoration,
                                     validator: (value) {
                                       if (value.isEmpty) return 'Please fill';
-                                      if (value.length > 10)
+                                      if (value.length != 10)
                                         return 'Enter 10 digit Number';
                                       if (!isNumeric(value))
                                         return 'Please Enter valid number';

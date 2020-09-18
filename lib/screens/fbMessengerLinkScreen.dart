@@ -3,16 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:whatsappshare/constant.dart';
+import 'package:whatsappshare/components/customButtomSheet.dart';
+import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/constant.dart';
 import '../drawer.dart';
 
-class MessengerLink extends StatefulWidget {
+class FbMessengerLinkScreen extends StatefulWidget {
   @override
-  _MessengerLinkState createState() => _MessengerLinkState();
+  _FbMessengerLinkScreenState createState() => _FbMessengerLinkScreenState();
 }
 
-class _MessengerLinkState extends State<MessengerLink> {
-  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+class _FbMessengerLinkScreenState extends State<FbMessengerLinkScreen> {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -28,16 +29,32 @@ class _MessengerLinkState extends State<MessengerLink> {
       ),
     );
     return Scaffold(
-//      key: _drawerKey,
+      key: scaffoldKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Generate"),
         icon: Icon(
           FlatIcons.settings_5,
         ),
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState.validate()) {
-            Share.share("http://m.me/$pageName");
+            String link = "http://m.me/$pageName";
+            var sheetData = await customBottomSheet(
+              context,
+              link,
+              CustomBottomSheetType.fbMessenger,
+            );
+          } else {
+            scaffoldKey.currentState.showSnackBar(
+              SnackBar(
+                // behavior: SnackBarBehavior.floating,
+                content: Text('Wrong Input'),
+                action: SnackBarAction(
+                  label: 'OK',
+                  onPressed: () {},
+                ),
+              ),
+            );
           }
         },
       ),
@@ -53,13 +70,6 @@ class _MessengerLinkState extends State<MessengerLink> {
                 Navigator.pop(context);
               },
             ),
-//            IconButton(
-//              icon: Icon(Icons.menu),
-//              color: Colors.blue,
-//              onPressed: () {
-//                _drawerKey.currentState.openEndDrawer();
-//              },
-//            ),
           ],
         ),
       ),

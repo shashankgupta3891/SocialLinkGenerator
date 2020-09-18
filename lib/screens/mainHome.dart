@@ -4,11 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share/share.dart';
 
-import 'drawer.dart';
-import 'screens/email.dart';
-import 'screens/messenger.dart';
-import 'screens/whatsapp.dart';
-import 'screens/developerInfo.dart';
+import '../drawer.dart';
+import 'developerInfo.dart';
 
 class MainHome extends StatefulWidget {
   @override
@@ -55,13 +52,13 @@ class _MainHomeState extends State<MainHome> {
                     .push(MaterialPageRoute(builder: (context) => DevInfo()));
               },
             ),
-//            IconButton(
-//              icon: Icon(Icons.menu),
-//              color: Colors.black,
-//              onPressed: () {
-//                _drawerKey.currentState.openEndDrawer();
-//              },
-//            ),
+            IconButton(
+              icon: Icon(FontAwesomeIcons.save),
+              color: Colors.black,
+              onPressed: () {
+                Navigator.pushNamed(context, '/saved');
+              },
+            ),
           ],
         ),
       ),
@@ -106,12 +103,7 @@ class _MainHomeState extends State<MainHome> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => Whatsapp(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/whatsapp');
                       },
                       child: Container(
                         height: 124.0,
@@ -136,12 +128,7 @@ class _MainHomeState extends State<MainHome> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => MessengerLink(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/fbMessenger');
                       },
                       child: Container(
                         height: 124.0,
@@ -166,12 +153,7 @@ class _MainHomeState extends State<MainHome> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => EmailLink(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/email');
                       },
                       child: Container(
                         height: 124.0,

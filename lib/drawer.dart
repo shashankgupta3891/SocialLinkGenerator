@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/messenger.dart';
-import 'screens/email.dart';
-import 'screens/whatsapp.dart';
+import 'screens/fbMessengerLinkScreen.dart';
+import 'screens/emailLinkScreen.dart';
+import 'screens/whatsappLinkScreen.dart';
 
 class GlobalDrawer extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class GlobalDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => MessengerLink(),
+                  builder: (BuildContext context) => FbMessengerLinkScreen(),
                 ),
               );
             },
@@ -26,7 +26,7 @@ class GlobalDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => EmailLink()));
+                      builder: (BuildContext context) => EmailLinkScreen()));
             },
           ),
           ListTile(
@@ -35,7 +35,7 @@ class GlobalDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => Whatsapp()));
+                      builder: (BuildContext context) => WhatsappLinkScreen()));
             },
           ),
         ],

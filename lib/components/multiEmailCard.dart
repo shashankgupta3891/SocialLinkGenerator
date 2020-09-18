@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whatsappshare/constant.dart';
+import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/constant.dart';
 
-import '../validation.dart';
+import '../utilities/validation.dart';
 
 class MultiEmailCard extends StatefulWidget {
   final List<String> carbonCopyList;
@@ -130,6 +130,7 @@ class _MultiEmailCardState extends State<MultiEmailCard> {
       child: Padding(
         padding: EdgeInsets.only(bottom: 10),
         child: TextFormField(
+          initialValue: widget.carbonCopyList[index],
           validator: (value) {
             if (value.isEmpty) return 'Please Fill';
             if (!isEmailId(value)) return 'Email is not valid';
