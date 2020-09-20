@@ -75,8 +75,6 @@ class SavedLinksScreen extends StatelessWidget {
                     String link = links[index]['link'];
                     return Container(
                       margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
@@ -139,6 +137,41 @@ class SavedLinksScreen extends StatelessWidget {
                                       ),
                                       onPressed: () async {
                                         await Share.share(link);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: RaisedButton.icon(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      color: Colors.red,
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                      ),
+                                      label: Text(
+                                        'Delete',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      onPressed: () async {
+                                        await box.deleteAt(index);
+
+                                        final snackBar = SnackBar(
+                                          behavior: SnackBarBehavior.floating,
+                                          content: Text('Item Deleted'),
+                                          action: SnackBarAction(
+                                            onPressed: () {},
+                                            label: 'Ok',
+                                          ),
+                                        );
+                                        scaffoldKey.currentState
+                                            .showSnackBar(snackBar);
                                       },
                                     ),
                                   ),
