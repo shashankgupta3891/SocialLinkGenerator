@@ -8,7 +8,7 @@ import 'package:whatsappshare/screens/savedLinksScreen.dart';
 import 'package:whatsappshare/screens/whatsappLinkScreen.dart';
 
 import 'screens/mainHome.dart';
-
+// added for an event organized every year
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory document = await getApplicationDocumentsDirectory();
