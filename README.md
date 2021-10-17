@@ -3,7 +3,7 @@
 _Build an app to create social media sharing links which will have build in custom message in flutter<br>
 Link Generator App._
 
-Download the app from [here](https://drive.google.com/u/0/uc?id=1x7i_LmVydeqjbs3YHQ7O_xqLcF4ckh-p&export=download).
+Download the app from [here](https://github.com/shashankgupta3891/SocialLinkGenerator/tree/master/apk).
 
 **I hope this app will help you ❤️ to create social media sharing links to sent pre typed message to your customer**
 
