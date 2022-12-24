@@ -1,9 +1,9 @@
+import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappshare/components/customButtomSheet.dart';
+
 import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/constant.dart';
 
 class FbMessengerLinkScreen extends StatefulWidget {
@@ -44,7 +44,7 @@ class _FbMessengerLinkScreenState extends State<FbMessengerLinkScreen> {
               CustomBottomSheetType.fbMessenger,
             );
           } else {
-            scaffoldKey.currentState.showSnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 // behavior: SnackBarBehavior.floating,
                 content: Text('Wrong Input'),

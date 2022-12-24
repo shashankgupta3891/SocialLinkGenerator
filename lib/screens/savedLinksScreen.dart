@@ -1,5 +1,4 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,7 +37,6 @@ class SavedLinksScreen extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
-          brightness: Brightness.light,
           backgroundColor: Colors.white,
           title: Text(
             'Saved Links',
@@ -56,6 +54,7 @@ class SavedLinksScreen extends StatelessWidget {
               indicatorSize: MD2IndicatorSize.normal,
             ),
           ),
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         body: TabBarView(
           children: myTabs.map((Tab tab) {
@@ -86,11 +85,14 @@ class SavedLinksScreen extends StatelessWidget {
                                 Expanded(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton.icon(
-                                      shape: RoundedRectangleBorder(
+                                    child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(10)),
-                                      color: Colors.blue,
+                                              BorderRadius.circular(10),
+                                        ),
+                                        foregroundColor: Colors.blue,
+                                      ),
                                       icon: Icon(
                                         FontAwesomeIcons.copy,
                                         color: Colors.white,
@@ -111,7 +113,7 @@ class SavedLinksScreen extends StatelessWidget {
                                             label: 'Done',
                                           ),
                                         );
-                                        scaffoldKey.currentState
+                                        ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
                                       },
                                     ),
@@ -120,11 +122,14 @@ class SavedLinksScreen extends StatelessWidget {
                                 Expanded(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton.icon(
-                                      shape: RoundedRectangleBorder(
+                                    child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(10)),
-                                      color: Colors.blue,
+                                              BorderRadius.circular(10),
+                                        ),
+                                        foregroundColor: Colors.blue,
+                                      ),
                                       icon: Icon(
                                         FontAwesomeIcons.share,
                                         color: Colors.white,
@@ -144,11 +149,13 @@ class SavedLinksScreen extends StatelessWidget {
                                 Expanded(
                                   child: Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton.icon(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      color: Colors.red,
+                                    child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        foregroundColor: Colors.red,
+                                      ),
                                       icon: Icon(
                                         Icons.delete,
                                         color: Colors.white,
@@ -170,7 +177,7 @@ class SavedLinksScreen extends StatelessWidget {
                                             label: 'Ok',
                                           ),
                                         );
-                                        scaffoldKey.currentState
+                                        ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
                                       },
                                     ),

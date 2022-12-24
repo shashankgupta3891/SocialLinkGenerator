@@ -1,13 +1,11 @@
+import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsappshare/components/customButtomSheet.dart';
 import 'package:whatsappshare/components/multiEmailCard.dart';
-import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/constant.dart';
-
-import 'file:///C:/Users/shash/OneDrive/Desktop/flutterProjects/SocialLinkGenerator/lib/utilities/validation.dart';
+import 'package:whatsappshare/utilities/constant.dart';
+import 'package:whatsappshare/utilities/validation.dart';
 
 class EmailLinkScreen extends StatefulWidget {
   @override
@@ -60,7 +58,7 @@ class _EmailLinkScreenState extends State<EmailLinkScreen> {
               CustomBottomSheetType.email,
             );
           } else {
-            scaffoldKey.currentState.showSnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 // behavior: SnackBarBehavior.floating,
                 content: Text('Wrong Input'),

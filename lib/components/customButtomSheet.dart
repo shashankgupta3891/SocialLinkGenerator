@@ -116,9 +116,13 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(10),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      foregroundColor: Colors.blue,
+                    ),
                     onPressed: () async {
                       await FlutterClipboard.copy(widget.link);
                       final snackBar = SnackBar(
@@ -129,10 +133,8 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget> {
                           label: 'Done',
                         ),
                       );
-                      widget.bottomSheetScaffoldKey.currentState
-                          .showSnackBar(snackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
-                    color: Colors.blue,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -152,13 +154,15 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(10),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      foregroundColor: Colors.blue,
+                    ),
                     onPressed: () async {
                       await Share.share(widget.link);
                     },
-                    color: Colors.blue,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -178,9 +182,12 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(10),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      foregroundColor: Colors.blue,
+                    ),
                     onPressed: () async {
                       await linkDataBox.add({'link': widget.link});
 
@@ -192,12 +199,10 @@ class _CustomBottomSheetWidgetState extends State<CustomBottomSheetWidget> {
                           label: 'Done',
                         ),
                       );
-                      widget.bottomSheetScaffoldKey.currentState
-                          .showSnackBar(snackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
                       // print(linkDataBox.getAt(1));
                     },
-                    color: Colors.blue,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
